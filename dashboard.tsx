@@ -222,7 +222,7 @@ export default function Dashboard() {
               <CardHeader className="flex flex-row items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/favicon-solana-yHdjDfBODl7e3hB8u3ahrxiZavl4CR.png"
+                    src="https://github.com/DavidB-77/qubeshare-dash/blob/main/asset/favicon-solana.png"
                     alt="Solana Logo"
                     width={24}
                     height={24}
