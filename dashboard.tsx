@@ -79,7 +79,7 @@ export default function Dashboard() {
     <div 
       className="min-h-screen p-4 text-[#9298A2] font-inter bg-cover bg-center bg-no-repeat relative"
       style={{
-        backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/web-cube-bg-HxbH0VeN4UZ3FTUl7txKTHjWYY2unI.png')"
+        backgroundImage: "url('https://github.com/DavidB-77/qubeshare-dash/blob/main/asset/web-cube-bg.png')"
       }}
     >
       <header className="flex justify-between items-center mb-6">
