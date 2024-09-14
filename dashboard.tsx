@@ -32,7 +32,7 @@ const sampleAlerts = [
   { id: 3, type: 'warning', message: 'Validator performance dropped below 95%' },
 ]
 
-export default function Dashboard() {
+export default function Component() {
   const [activeTab, setActiveTab] = useState("stake")
   const [autoUpdate, setAutoUpdate] = useState(true)
   const [showAlerts, setShowAlerts] = useState(false)
@@ -54,6 +54,13 @@ export default function Dashboard() {
 
   const handleCloseContactForm = () => {
     setShowContactForm(false)
+  }
+
+  const handleOverlayClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target === e.currentTarget) {
+      handleCloseAlerts()
+      handleCloseContactForm()
+    }
   }
 
   const handleDisconnect = () => {
@@ -79,11 +86,11 @@ export default function Dashboard() {
     <div 
       className="min-h-screen p-4 text-[#9298A2] font-inter bg-cover bg-center bg-no-repeat relative"
       style={{
-        backgroundImage: "url('https://github.com/DavidB-77/qubeshare-dash/blob/main/asset/web-cube-bg.png')"
+        backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/web-cube-bg-HxbH0VeN4UZ3FTUl7txKTHjWYY2unI.png')"
       }}
     >
       <header className="flex justify-between items-center mb-6">
-        <h1 className={`text-2xl font-bold text-[#FDFEFD] ${nunito.className}`}>Solana Staking Dashboard</h1>
+        <h1 className={`text-2xl font-bold text-[#FDFEFD] ${nunito.className}`}>QubeShare Staking and Reward Dashboard</h1>
         <div className="flex items-center space-x-4">
           <Button 
             onClick={handleStakeNow} 
@@ -109,15 +116,24 @@ export default function Dashboard() {
             <nav>
               <Tabs value={activeTab} onValueChange={handleTabChange} orientation="vertical" className="w-full">
                 <TabsList className="flex flex-col items-start space-y-2 bg-transparent">
-                  <TabsTrigger value="stake" className="w-full justify-start text-sm data-[state=active]:bg-[#384152] text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl">
+                  <TabsTrigger 
+                    value="stake" 
+                    className="w-full justify-start text-sm text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl transition-colors duration-200 hover:bg-[#6772DB] data-[state=active]:bg-[#6772DB]"
+                  >
                     <PieChart className="mr-2 h-4 w-4 text-[#FDFEFD]" />
                     Stake/Unstake
                   </TabsTrigger>
-                  <TabsTrigger value="alerts" className="w-full justify-start text-sm data-[state=active]:bg-[#384152] text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl">
+                  <TabsTrigger 
+                    value="alerts" 
+                    className="w-full justify-start text-sm text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl transition-colors duration-200 hover:bg-[#6772DB] data-[state=active]:bg-[#6772DB]"
+                  >
                     <Bell className="mr-2 h-4 w-4 text-[#FDFEFD]" />
                     Alerts
                   </TabsTrigger>
-                  <TabsTrigger value="contact" className="w-full justify-start text-sm data-[state=active]:bg-[#384152] text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl">
+                  <TabsTrigger 
+                    value="contact" 
+                    className="w-full justify-start text-sm text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl transition-colors duration-200 hover:bg-[#6772DB] data-[state=active]:bg-[#6772DB]"
+                  >
                     <Mail className="mr-2 h-4 w-4 text-[#FDFEFD]" />
                     Contact Us
                   </TabsTrigger>
@@ -173,7 +189,7 @@ export default function Dashboard() {
               <CardContent>
                 <div className="w-full bg-[#384152] h-2 rounded-full overflow-hidden">
                   <div
-                    className="h-full bg-[#B9EA6C] rounded-full"
+                    className="h-full bg-[#6772DB] rounded-full"
                     style={{ width: `${mockData.currentEpochProgress}%` }}
                   ></div>
                 </div>
@@ -222,7 +238,7 @@ export default function Dashboard() {
               <CardHeader className="flex flex-row items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Image
-                    src="https://github.com/DavidB-77/qubeshare-dash/blob/main/asset/favicon-solana.png"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/favicon-solana-yHdjDfBODl7e3hB8u3ahrxiZavl4CR.png"
                     alt="Solana Logo"
                     width={24}
                     height={24}
@@ -269,13 +285,13 @@ export default function Dashboard() {
             <CardContent>
               <table className="w-full text-sm">
                 <thead>
-                  <tr className="text-[#FDFEFD]">
+                  <tr className="text-[#F0F2F3]">
                     <th className="text-left">Type</th>
                     <th className="text-left">Amount</th>
                     <th className="text-left">Date</th>
                   </tr>
                 </thead>
-                <tbody className="text-[#FDFEFD]">
+                <tbody className="text-[#F0F2F3]">
                   <tr>
                     <td>Epoch Reward</td>
                     <td><span className="text-[#2CD688]">0.5 SOL</span></td>
@@ -300,8 +316,8 @@ export default function Dashboard() {
 
       {/* Alerts Pop-up */}
       {showAlerts && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className={`${cardStyle} w-[calc(50%-1rem)] max-w-2xl`}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={handleOverlayClick}>
+          <Card className={`${cardStyle} w-[calc(50%-1rem)] max-w-2xl`} onClick={(e) => e.stopPropagation()}>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className={`text-lg text-[#FDFEFD] ${nunito.className}`}>Alerts</CardTitle>
               <Button
@@ -331,8 +347,8 @@ export default function Dashboard() {
 
       {/* Contact Form Pop-up */}
       {showContactForm && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-          <Card className={`${cardStyle} w-[calc(50%-1rem)] max-w-2xl`}>
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={handleOverlayClick}>
+          <Card className={`${cardStyle} w-[calc(50%-1rem)] max-w-2xl`} onClick={(e) => e.stopPropagation()}>
             <CardHeader className="flex flex-row items-center justify-between">
               <CardTitle className={`text-lg text-[#FDFEFD] ${nunito.className}`}>Contact Us</CardTitle>
               <Button
