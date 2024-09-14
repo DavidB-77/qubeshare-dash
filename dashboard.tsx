@@ -5,7 +5,6 @@ import { Bell, LogOut, Mail, PieChart, User, X } from 'lucide-react'
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import Image from 'next/image'
@@ -33,7 +32,7 @@ const sampleAlerts = [
 ]
 
 export default function Component() {
-  const [activeTab, setActiveTab] = useState("stake")
+  const [activeTab, setActiveTab] = useState("dashboard")
   const [autoUpdate, setAutoUpdate] = useState(true)
   const [showAlerts, setShowAlerts] = useState(false)
   const [showContactForm, setShowContactForm] = useState(false)
@@ -68,9 +67,9 @@ export default function Component() {
     console.log("Disconnecting wallet...")
   }
 
-  const handleStakeNow = () => {
-    // Implement staking logic
-    console.log("Initiating staking process...")
+  const handleStakeUnstake = () => {
+    // Implement staking/unstaking logic
+    console.log("Initiating stake/unstake process...")
   }
 
   const handleSubmitContactForm = (e: React.FormEvent) => {
@@ -81,80 +80,71 @@ export default function Component() {
   }
 
   const cardStyle = "bg-[#0E121D] bg-opacity-50 border-none backdrop-blur-sm rounded-2xl shadow-[0_0_10px_1px_rgba(185,234,108,0.1)]"
+  const menuItemStyle = "w-full flex items-center px-4 py-2 text-sm text-[#FDFEFD] rounded-lg transition-colors duration-200 bg-[#8A51F5] hover:bg-[#6A3ED5] mb-2"
 
   return (
     <div 
       className="min-h-screen p-4 text-[#9298A2] font-inter bg-cover bg-center bg-no-repeat relative"
       style={{
-        backgroundImage: "url('https://github.com/DavidB-77/qubeshare-dash/blob/main/asset/web-cube-bg.png')"
+        backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/web-cube-bg-HxbH0VeN4UZ3FTUl7txKTHjWYY2unI.png')"
       }}
     >
-      <header className="flex justify-between items-center mb-6">
+      <header className="mb-6 pl-4">
         <h1 className={`text-2xl font-bold text-[#FDFEFD] ${nunito.className}`}>QubeShare Staking and Reward Dashboard</h1>
-        <div className="flex items-center space-x-4">
-          <Button 
-            onClick={handleStakeNow} 
-            className="bg-[#8A51F5] hover:bg-[#6A3ED5] text-[#FDFEFD] rounded-xl transition-colors duration-200"
-          >
-            Stake Now
-          </Button>
-          <span className={`text-sm text-[#FDFEFD] ${nunito.className}`}>{mockData.userName}</span>
-          <Avatar>
-            <AvatarImage src="/placeholder-avatar.jpg" alt={mockData.userName} />
-            <AvatarFallback><User className="text-[#9298A2]" /></AvatarFallback>
-          </Avatar>
-        </div>
       </header>
 
       <div className="grid grid-cols-5 gap-4">
         {/* Sidebar */}
         <Card className={`col-span-1 ${cardStyle}`}>
-          <CardHeader className="pb-4">
-            <CardTitle className={`text-lg font-bold text-[#FDFEFD] ${nunito.className}`}>Dashboard</CardTitle>
-          </CardHeader>
-          <CardContent className="flex flex-col justify-between h-[calc(100%-76px)]">
-            <nav>
-              <Tabs value={activeTab} onValueChange={handleTabChange} orientation="vertical" className="w-full">
-                <TabsList className="flex flex-col items-start space-y-2 bg-transparent">
-                  <TabsTrigger 
-                    value="stake" 
-                    className="w-full justify-start text-sm text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl transition-colors duration-200 hover:bg-[#6772DB] data-[state=active]:bg-[#6772DB]"
-                  >
-                    <PieChart className="mr-2 h-4 w-4 text-[#FDFEFD]" />
-                    Stake/Unstake
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="alerts" 
-                    className="w-full justify-start text-sm text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl transition-colors duration-200 hover:bg-[#6772DB] data-[state=active]:bg-[#6772DB]"
-                  >
-                    <Bell className="mr-2 h-4 w-4 text-[#FDFEFD]" />
-                    Alerts
-                  </TabsTrigger>
-                  <TabsTrigger 
-                    value="contact" 
-                    className="w-full justify-start text-sm text-[#FDFEFD] data-[state=active]:text-[#FDFEFD] rounded-xl transition-colors duration-200 hover:bg-[#6772DB] data-[state=active]:bg-[#6772DB]"
-                  >
-                    <Mail className="mr-2 h-4 w-4 text-[#FDFEFD]" />
-                    Contact Us
-                  </TabsTrigger>
-                </TabsList>
-              </Tabs>
+          <CardContent className="flex flex-col justify-between h-full py-6">
+            <nav className="space-y-2">
+              <button 
+                onClick={handleStakeUnstake}
+                className={menuItemStyle}
+              >
+                <PieChart className="mr-3 h-5 w-5" />
+                <span className="flex-grow text-left">Stake/Unstake Now</span>
+              </button>
+              <button 
+                onClick={() => setShowAlerts(true)}
+                className={menuItemStyle}
+              >
+                <Bell className="mr-3 h-5 w-5" />
+                <span className="flex-grow text-left">Alerts</span>
+              </button>
+              <button 
+                onClick={() => setShowContactForm(true)}
+                className={menuItemStyle}
+              >
+                <Mail className="mr-3 h-5 w-5" />
+                <span className="flex-grow text-left">Contact Us</span>
+              </button>
             </nav>
             <Button 
               variant="outline" 
-              className="w-full text-sm mt-4 bg-[#8A51F5] text-[#FDFEFD] border-[#8A51F5] hover:bg-[#0E121D] hover:text-[#8A51F5] hover:border-[#8A51F5] transition-colors duration-200 rounded-xl" 
+              className={`${menuItemStyle} mt-4`}
               onClick={handleDisconnect}
             >
-              <LogOut className="mr-2 h-4 w-4" />
-              Disconnect
+              <LogOut className="mr-3 h-5 w-5" />
+              <span className="flex-grow text-left">Disconnect</span>
             </Button>
           </CardContent>
         </Card>
 
         {/* Main Content */}
         <div className="col-span-4 space-y-4">
-          {/* Metrics Section */}
-          <div className="grid grid-cols-4 gap-4">
+          {/* User Info and Metrics Section */}
+          <div className="grid grid-cols-5 gap-4">
+            {/* User Info Card */}
+            <Card className={cardStyle}>
+              <CardContent className="flex flex-col items-start justify-start h-full py-4">
+                <Avatar className="w-20 h-20 mb-2">
+                  <AvatarImage src="/placeholder-avatar.jpg" alt={mockData.userName} />
+                  <AvatarFallback><User className="w-10 h-10 text-[#9298A2]" /></AvatarFallback>
+                </Avatar>
+                <span className={`text-base text-[#FDFEFD] ${nunito.className}`}>{mockData.userName}</span>
+              </CardContent>
+            </Card>
             <Card className={cardStyle}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
                 <CardTitle className={`text-sm font-medium text-[#FDFEFD] ${nunito.className}`}>Amount Staked</CardTitle>
@@ -238,7 +228,7 @@ export default function Component() {
               <CardHeader className="flex flex-row items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Image
-                    src="https://github.com/DavidB-77/qubeshare-dash/blob/main/asset/favicon-solana.png"
+                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/favicon-solana-yHdjDfBODl7e3hB8u3ahrxiZavl4CR.png"
                     alt="Solana Logo"
                     width={24}
                     height={24}
