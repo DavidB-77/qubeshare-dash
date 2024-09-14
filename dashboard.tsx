@@ -86,7 +86,7 @@ export default function Component() {
     <div 
       className="min-h-screen p-4 text-[#9298A2] font-inter bg-cover bg-center bg-no-repeat relative"
       style={{
-        backgroundImage: "url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/web-cube-bg-HxbH0VeN4UZ3FTUl7txKTHjWYY2unI.png')"
+        backgroundImage: "url('https://github.com/DavidB-77/qubeshare-dash/blob/main/asset/web-cube-bg.png')"
       }}
     >
       <header className="flex justify-between items-center mb-6">
@@ -238,7 +238,7 @@ export default function Component() {
               <CardHeader className="flex flex-row items-center justify-between">
                 <div className="flex items-center space-x-2">
                   <Image
-                    src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/favicon-solana-yHdjDfBODl7e3hB8u3ahrxiZavl4CR.png"
+                    src="https://github.com/DavidB-77/qubeshare-dash/blob/main/asset/favicon-solana.png"
                     alt="Solana Logo"
                     width={24}
                     height={24}
